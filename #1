@@ -1,0 +1,71 @@
+local lib = {}
+
+function lib.new(name)
+local obj = {}
+
+local UILibTest = Instance.new("ScreenGui")
+local Tab = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local Area = Instance.new("Frame")
+local UIGridLayout = Instance.new("UIGridLayout")
+
+UILibTest.Name = "UILibTest"
+UILibTest.Parent = game.Players.LocalPlayer.PlayerGui
+UILibTest.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Tab.Name = "Tab"
+Tab.Parent = UILibTest
+Tab.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Tab.BorderSizePixel = 0
+Tab.Position = UDim2.new(0.0575495064, 0, 0.0865490139, 0)
+Tab.Size = UDim2.new(0, 228, 0, 312)
+
+Title.Name = "Title"
+Title.Parent = Tab
+Title.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+Title.BorderSizePixel = 0
+Title.Size = UDim2.new(0, 228, 0, 33)
+Title.Font = Enum.Font.SourceSans
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 14.000
+Title.Text = name
+
+Area.Name = "Area"
+Area.Parent = Tab
+Area.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Area.BackgroundTransparency = 1.000
+Area.Position = UDim2.new(0.0614035092, 0, 0.144230768, 0)
+Area.Size = UDim2.new(0, 200, 0, 251)
+
+UIGridLayout.Parent = Area
+UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIGridLayout.CellSize = UDim2.new(0, 200, 0, 26)
+
+obj.gui = UILibTest
+
+function obj.button(text, callback)
+local TextButton = Instance.new("TextButton")
+TextButton.Parent = Area
+TextButton.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(-0.00359648839, 0, 0.00478853285, 0)
+TextButton.Size = UDim2.new(0, 200, 0, 26)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = text
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 14
+
+TextButton.MouseButton1Click:Connect(function()
+local S, E = pcall(callback)
+if not S then warn(text, E)
+end
+end)
+end
+
+
+return obj
+end
+
+
+
+return lib
